@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ھۇشيار تېكىست يېزىش قورالى</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #091319 0%, #0d1e24 100%);
+      --surface-glass: rgba(18, 38, 46, 0.82);
+      --card-bg: rgba(26, 52, 62, 0.65);
+      --accent-primary: #14b8a6;
+      --accent-glow: rgba(20, 184, 166, 0.35);
+      --accent-light: #2dd4bf;
+      --text-primary: #f0fdfa;
+      --text-secondary: #99f6e4;
+      --text-muted: #5eead4;
+      --border-color: rgba(45, 212, 191, 0.22);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'UKIJ Tuz', 'ALKATIP Basma', 'Amiri', 'Uyghur Pashto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      width: 380px;
+      min-height: 580px;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      padding: 16px;
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+    }
+
+    /* Glass Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .brand-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      color: #99f6e4;
+      opacity: 0.85;
+    }
+
+    .privacy-badge {
+      font-size: 10px;
+      padding: 4px 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Tab Switcher */
+    .tabs {
+      display: flex;
+      background: rgba(15, 32, 38, 0.7);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 8px 4px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: #99f6e4;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-primary);
+      color: #042f2e;
+      font-weight: bold;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #5eead4;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* File drop area */
+    .upload-area {
+      border: 2px dashed rgba(45, 212, 191, 0.35);
+      border-radius: var(--radius-md);
+      padding: 20px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(13, 27, 33, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent-primary);
+      background: rgba(20, 184, 166, 0.08);
+    }
+
+    .upload-area p {
+      font-size: 12px;
+      color: #ccfbf1;
+      margin-top: 6px;
+    }
+
+    .upload-area span {
+      font-size: 10px;
+      color: #99f6e4;
+      opacity: 0.7;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Input text & URL */
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .text-input {
+      width: 100%;
+      background: rgba(10, 22, 27, 0.75);
+      border: 1px solid var(--border-color);
+      color: #ffffff;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      outline: none;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .text-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* Select */
+    .select-lang {
+      width: 100%;
+      background: rgba(10, 22, 27, 0.75);
+      border: 1px solid var(--border-color);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    /* Action buttons */
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      color: #042f2e;
+      font-weight: 700;
+      border: none;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--accent-glow);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(20, 184, 166, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 60, 70, 0.6);
+      color: #f0fdfa;
+      box-shadow: none;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(30, 60, 70, 0.9);
+      box-shadow: none;
+    }
+
+    /* Audio preview / speed control */
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 22, 27, 0.6);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+    }
+
+    .speed-btn {
+      background: rgba(45, 212, 191, 0.15);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      color: #99f6e4;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    /* Result Editor */
+    .editor-box {
+      width: 100%;
+      min-height: 140px;
+      max-height: 200px;
+      background: rgba(8, 18, 22, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: #f0fdfa;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.8;
+      resize: vertical;
+      outline: none;
+      text-align: justify;
+      text-justify: inter-word;
+      text-indent: 1.8em;
+    }
+
+    .editor-box:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* Export Row */
+    .export-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .export-btn {
+      padding: 8px 4px;
+      font-size: 11px;
+      background: rgba(20, 184, 166, 0.15);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      color: #5eead4;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .export-btn:hover {
+      background: var(--accent-primary);
+      color: #042f2e;
+      font-weight: bold;
+    }
+
+    /* Status indicator */
+    .status-text {
+      font-size: 11px;
+      color: #99f6e4;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .loader {
+      display: none;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(20, 184, 166, 0.3);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand-group">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+      </div>
+      <div>
+        <h1 class="brand-title">ھۇشيار تېكىست يېزىش</h1>
+        <div class="brand-tag">يەرلىك ئەقلىي ئاۋاز ئايلاندۇرغۇچ</div>
+      </div>
+    </div>
+    <div class="privacy-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#34d399"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      نۆل تېلېمېترى
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-file">ھۆججەت يۈكلەش</button>
+    <button class="tab-btn" id="tab-url">تور ئۇلانمىسى</button>
+    <button class="tab-btn" id="tab-mic">مىكروفون</button>
+  </div>
+
+  <!-- Main Input Card -->
+  <div class="card">
+    <label class="section-title">تىل تاللاڭ</label>
+    <select class="select-lang" id="select-lang">
+      <option value="ug" selected>ئۇيغۇر تىلى (Uyghurche)</option>
+      <option value="ar">ئەرەب تىلى (العربية)</option>
+      <option value="en">ئىنگلىز تىلى (English)</option>
+      <option value="tr">تۈرك تىلى (Türkçe)</option>
+    </select>
+
+    <!-- File View -->
+    <div id="view-file">
+      <div class="upload-area" id="drop-area">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#14b8a6"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+        <p id="file-name-label">ئاۋاز ياكى ۋىدىئو ھۆججىتى تاللاڭ</p>
+        <span>(MP3, M4A, WAV, MP4, WebM قوللايدۇ)</span>
+      </div>
+      <input type="file" id="file-input" accept="audio/*,video/*">
+    </div>
+
+    <!-- URL View -->
+    <div id="view-url" style="display: none;">
+      <label class="section-title">ئاۋاز ياكى ۋىدىئو ئۇلانمىسىنى چاپلاڭ</label>
+      <input type="url" class="text-input" id="url-input" placeholder="https://example.com/audio.mp3">
+    </div>
+
+    <!-- Mic View -->
+    <div id="view-mic" style="display: none;">
+      <button class="btn btn-secondary" id="btn-record-toggle" style="margin-bottom: 8px;">
+        <span id="mic-status-label">🎙️ ئاۋاز ئېلىشنى باشلاش</span>
+      </button>
+      <p style="font-size: 11px; color: #99f6e4; text-align: center;">مىكروفون ئارقىلىق سۆزلەپ نەق مەيداندا ئايلاندۇرۇڭ</p>
+    </div>
+
+    <!-- Action button -->
+    <button class="btn" id="btn-transcribe" style="margin-top: 14px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      تېكىستكە ئايلاندۇرۇش
+    </button>
+
+    <div class="status-text" id="status-container">
+      <div class="loader" id="loader"></div>
+      <span id="status-msg">ھازىر بىر تەرەپ قىلىشقا تەييار</span>
+    </div>
+  </div>
+
+  <!-- Audio Player & Speed -->
+  <div class="card" id="player-card" style="display: none;">
+    <div class="section-title">ئاۋاز ئاڭلاش ۋە سۈرئەت كونترولى</div>
+    <audio id="audio-preview" controls style="width: 100%; height: 36px;"></audio>
+    <div class="audio-controls">
+      <span style="font-size: 11px; color: #99f6e4;">قويۇش سۈرئىتى:</span>
+      <div style="display: flex; gap: 4px;">
+        <button class="speed-btn" data-speed="0.75">0.75x</button>
+        <button class="speed-btn" data-speed="1.0" style="font-weight: bold; background: var(--accent-primary); color: #042f2e;">1.0x</button>
+        <button class="speed-btn" data-speed="1.25">1.25x</button>
+        <button class="speed-btn" data-speed="1.5">1.5x</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result & Editor Card -->
+  <div class="card">
+    <div class="section-title" style="justify-content: space-between;">
+      <span>چىققان تېكىست ۋە تەھرىرلىگۈچ</span>
+      <button id="btn-copy-text" style="background: none; border: none; color: #5eead4; font-size: 11px; cursor: pointer;">📋 كۆچۈرۈش</button>
+    </div>
+
+    <textarea class="editor-box" id="result-text" placeholder="ئاۋازدىن ئايلانغان تېكىست بۇ يەرگە چىقىدۇ. سىز بىۋاسىتە ئىملا، ئابزاس ياكى مەزمۇننى تەھرىرلىيەلەيسىز..."></textarea>
+
+    <!-- Export Buttons -->
+    <div class="export-row">
+      <button class="export-btn" id="btn-export-txt">📄 TXT قىلىش</button>
+      <button class="export-btn" id="btn-export-srt">🎬 SRT تەرجىمە</button>
+      <button class="export-btn" id="btn-export-doc">📝 Word (DOC)</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
